@@ -18,8 +18,7 @@ import java.util.logging.Logger;
  * @author Eranga
  */
 public class DecryptHandler {
-
-   
+    
     public String readOutput(){
         String content="";
         try {
@@ -31,10 +30,12 @@ public class DecryptHandler {
         }
         return content;
     }
-    public void doDecryption(String key){
+    public String[] doDecryption(String key){
         byte[] keyBytes=this.convertToBinary(key);
          String content=this.readOutput();
          String[] layers = content.split("\\n");
+         String[] output = new String[layers.length];
+         int y=0;
          for(String x:layers){
              String original="";
              int[] byteVal=new int[x.length()/8];
@@ -61,7 +62,10 @@ public class DecryptHandler {
                 if(j==keyBytes.length)j=0;
                 
             }
+             output[y]= original;
+             y++;
          }
+         return output;
     }
     public byte[] convertToBinary(String layer){
         byte[] byteArray=null;

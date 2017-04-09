@@ -112,7 +112,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void encryptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encryptButtonActionPerformed
         EncryptHandler encryptHandler=new EncryptHandler();
         String key = keyField.getText().trim();
-        encryptHandler.doEncryption(key);
+        String[] outPut;
+        if(key.length()== 0){
+            outPut = encryptHandler.doEncryption("apple");
+        }else{
+            outPut = encryptHandler.doEncryption(key);
+        }
+        
+        outputArea.setText(outPut[0]);
     }//GEN-LAST:event_encryptButtonActionPerformed
 
     private void keyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyFieldActionPerformed
@@ -122,7 +129,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void DecryptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecryptButtonActionPerformed
         DecryptHandler decryptHandler=new DecryptHandler();
         String key = keyField.getText().trim();
-        decryptHandler.doDecryption(key);
+        String[] outPut;
+        if(key.length()==0){
+            outPut = decryptHandler.doDecryption("apple");
+        }else{
+            outPut = decryptHandler.doDecryption(key);
+        }
+        outputArea.setText(outPut[0]);
+        
     }//GEN-LAST:event_DecryptButtonActionPerformed
 
     /**

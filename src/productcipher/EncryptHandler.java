@@ -7,7 +7,6 @@ package productcipher;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -45,10 +44,13 @@ public class EncryptHandler {
         }
         return content;
     }
-    public void doEncryption(String key){
+    public String[] doEncryption(String key){
         String content=this.readInput();
+        
         String[] layers = content.split("\\n");
+        String[] output = new String[layers.length];
         byte[] keyBytes = this.convertToBinary(key);
+        int y=0;
         for(String x:layers){
             byte[] layerBytes = this.convertToBinary(x);
             int j=0;
@@ -84,9 +86,11 @@ public class EncryptHandler {
                 if(j==keyBytes.length)j=0;
                 
             }
-            System.out.println(byteString);
             this.writeData(byteString);
+            output[y]=byteString;
+            y++;
         }
+        return output;
     }
     public void writeData(String data){
         bw=new BufferedWriter(fw);
