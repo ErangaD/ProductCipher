@@ -18,6 +18,7 @@ public class Permutation {
     static{
         encryptMap= new HashMap();
         decryptMap = new HashMap();
+        //All the 4bits values are substituted with a different 4bits value
         encryptMap.put("0000", "0010");
         encryptMap.put("0001", "0100");
         encryptMap.put("0010", "0110");
@@ -35,7 +36,7 @@ public class Permutation {
         encryptMap.put("1110", "1101");
         encryptMap.put("1111", "1111");
         
-        
+         //To take the original value reverse mapping
         decryptMap.put( "0010","0000");
         decryptMap.put( "0100","0001");
         decryptMap.put( "0110","0010");

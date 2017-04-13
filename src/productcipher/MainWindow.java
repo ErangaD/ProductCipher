@@ -5,6 +5,8 @@
  */
 package productcipher;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Eranga
@@ -16,6 +18,8 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        this.keyField.setText("apple");
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,8 +39,11 @@ public class MainWindow extends javax.swing.JFrame {
         keyField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
+        outputArea.setEditable(false);
         outputArea.setColumns(20);
+        outputArea.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
         outputArea.setRows(5);
         jScrollPane1.setViewportView(outputArea);
 
@@ -112,7 +119,29 @@ public class MainWindow extends javax.swing.JFrame {
     private void encryptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encryptButtonActionPerformed
         EncryptHandler encryptHandler=new EncryptHandler();
         String key = keyField.getText().trim();
-        encryptHandler.doEncryption(key);
+        String[] outPut=null;
+        if(key.length()== 0){
+            JOptionPane.showMessageDialog(null,"You have not given a valid key",
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            if(key.length()<5){
+                JOptionPane.showMessageDialog(null,"Key length must be greator than 4",
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                outPut = encryptHandler.doEncryption(key);
+            }
+            
+        }
+        if(outPut!=null){
+            outputArea.setText("");
+            for(String x:outPut){
+                    outputArea.append(x);
+                    outputArea.append("\n");
+            }
+            keyField.setText("");
+        }
+        
+        
     }//GEN-LAST:event_encryptButtonActionPerformed
 
     private void keyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyFieldActionPerformed
@@ -122,7 +151,21 @@ public class MainWindow extends javax.swing.JFrame {
     private void DecryptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecryptButtonActionPerformed
         DecryptHandler decryptHandler=new DecryptHandler();
         String key = keyField.getText().trim();
-        decryptHandler.doDecryption(key);
+        String[] outPut;
+        if(key.length()==0){
+            JOptionPane.showMessageDialog(null,"You have not given a valid key",
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            
+            outPut = decryptHandler.doDecryption(key);
+            outputArea.setText("");
+            for(String x:outPut){
+                    outputArea.append(x);
+                    outputArea.append("\n");
+            }
+        }
+        
+        
     }//GEN-LAST:event_DecryptButtonActionPerformed
 
     /**
