@@ -70,7 +70,7 @@ public class EncryptHandler {
                         String beforeConverted;
                         //xoring each byte to achieve substitution
                         int afterConversion = layerBytes[i]^keyBytes[j];
-                        //getting 8 bit length binary vlues
+                        //getting 8 bit length binary values according to the length
                         if(afterConversion<2){
                             beforeConverted=("0000000"+Integer.toBinaryString(afterConversion));
                         }else if(afterConversion<4){
@@ -97,14 +97,12 @@ public class EncryptHandler {
                         break;
                     }
                     if(j==keyBytes.length)j=0;
-
                 }
-
                 output[y]=byteString;
                 y++;
             }
-                this.writeData(output);
-                return output;
+            this.writeData(output);
+            return output;
         }
         
        return null;
